@@ -8,6 +8,6 @@ setup(name='gpuHunter',
       author='James Elkins',
       author_email='jelkinsiv@gmail.com',
       url='',
-      packages=['chump', 'praw'],
+      requires=['chump', 'praw']
       )
 git

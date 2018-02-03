@@ -1,43 +1,40 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 from datetime import datetime, timedelta
-from functools import reduce
 from chump import Application
 import praw
 from config import PUSHOVER_APP_SECRET, PUSHOVER_USER_SECRET, REDDIT_CLIENT_ID, REDDIT_CLIENT_SECRET, REDDIT_USER_AGENT
 
-checkMin = 150
 
-pushoverApp = Application(PUSHOVER_APP_SECRET)
-pushoverUser = pushoverApp.get_user(PUSHOVER_USER_SECRET)
+def hunt(check_interval):
+    pushover_app = Application(PUSHOVER_APP_SECRET)
+    pushover_user = pushover_app.get_user(PUSHOVER_USER_SECRET)
 
-reddit = praw.Reddit(client_id=REDDIT_CLIENT_ID,
-                     client_secret=REDDIT_CLIENT_SECRET,
-                     user_agent=REDDIT_USER_AGENT
-                     )
-
-
-def main():
+    reddit = praw.Reddit(client_id=REDDIT_CLIENT_ID,
+                         client_secret=REDDIT_CLIENT_SECRET,
+                         user_agent=REDDIT_USER_AGENT
+                         )
 
     subreddit = reddit.subreddit('buildapcsales')
-    min_delta = datetime.utcnow() - timedelta(minutes=checkMin)
+    min_delta = datetime.utcnow() - timedelta(minutes=check_interval)
 
     filtered_subs = [
         x for x in subreddit.new(limit=25)
-        if datetime.utcfromtimestamp(x.created_utc) >= min_delta and "[GPU]" in x.title
+        if datetime.utcfromtimestamp(x.created_utc) >= min_delta and "GPU" in x.title
     ]
 
-    title_list = list(map(lambda x: x.title, filtered_subs))
-    if title_list:
-        response_msg = reduce(lambda x, y: x + "\n" + y, title_list)
-        print(response_msg)
+    if filtered_subs:
+        response_msg = ""
+        for sub in filtered_subs:
+            response_msg += "\n<a href=\"" + sub.shortlink + "\">" + sub.title + "</a>"
 
         if response_msg:
-            push_notification = pushoverUser.send_message(
+            push_notification = pushover_user.send_message(
                 title="New GPU for sale",
-                message="<b>" + response_msg + "</b>",
+                message=response_msg,
                 html=True,
                 sound='gamelan')
 
+
 if __name__ == "__main__":
-    main()
+    hunt(15)
