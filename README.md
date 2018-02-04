@@ -14,6 +14,7 @@ to send a push notifications
 
 - Go to [Pushover](https://pushover.net/) and create an account.
 - Create a new App inside pushover to get the app secret.
+- Install pushover on your phone.
 
 #### Reddit
 - Go to [reddit.com/prefs/apps](https://www.reddit.com/prefs/apps) and create a new app.
