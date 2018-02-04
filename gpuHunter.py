@@ -37,4 +37,4 @@ def hunt(check_interval):
 
 
 if __name__ == "__main__":
-    hunt(15)
+    hunt(16)
