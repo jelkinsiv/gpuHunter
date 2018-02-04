@@ -6,7 +6,7 @@ Get push notifications if a new GPU is for sale on r/buildapcsales
 
 I'm trying to find a buy GPU but due to cryptomining they are hard to find in stock and for MSRP. 
 This uses praw to get a list of the latest GPU for sale from r/buildapcsales. It then uses crump 
-to send a push notifications
+to send push notifications to your phone.
 
 ## Requirement
 
@@ -28,7 +28,7 @@ python setup.py install
 
 You'll also need to make it executable if you want to set this up as a cron job.
 ```buildoutcfg
-chmod +x
+chmod +x gpuHunter.py
 ```
 
 Finally, you'll need to override the variables being imported from config.py or create a config.py 
