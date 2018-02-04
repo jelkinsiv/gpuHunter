@@ -44,5 +44,5 @@ REDDIT_USER_AGENT = ''
 ## How to use
 
 I setup a cron job on a raspberry pi to run the script every 15 minutes and set the 'check_interval'
-for the same 15 minutes. If you want to run faster or slower, make sure that update the 'check_intarval'
+for the same 15 minutes. If you want to run faster or slower, make sure that update the 'check_interval'
 in '\_\_main__'
