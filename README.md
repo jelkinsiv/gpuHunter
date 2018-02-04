@@ -26,7 +26,7 @@ Navigate to the python files and install
 python setup.py install
 ```
 
-You'll also need to make it executable
+You'll also need to make it executable if you want to set this up as a cron job.
 ```buildoutcfg
 chmod +x
 ```
